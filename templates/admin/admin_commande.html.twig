@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<a href="{{ path('admin_commande') }}" class="btn btn-success my-2">Ajouter une commande</a>
+
+<table class="table">
+<thead>
+<tr>
+{%for data in champs %}
+<th>{{ data }} </th>
+{% endfor %}
+
+
+<th>Edit</th>
+<th>supp</th>
+</tr>
+</thead>
+
+<tbody>
+{% for commande in commandes %}
+<tr>
+<td>{{ commande.id }}</td>
+<td>{{ commande.membre.nom }}  {{ commande.membre.prenom }}</td>
+<td>{{ commande.vehicule.titre }}</td>
+<td>{{ commande.dateHeureDepart|date('d/m/y à H:i:s')}}</td>
+<td>{{ commande.dateHeureFin|date('d/m/y à H:i:s')}}</td>
+<td>{{ commande.prixTotal }}</td>
+<td>{{ commande.dateEnregistrement|date('d/m/y à H:i:s')}}</td>
+
+<td>
+
+<a href="{{ path('admin_edit_commande',{id: commande.id}) }}" class="text-success">
+<i class="fas fa-edit fa-2x"></i>
+</a>
+</td>
+
+<td>
+<a href="{{ path('admin_delete_commande',{id: commande.id}) }}" class="text-danger">
+<i class="fas fa-trash fa-2x"></i> 
+</a>
+</td> 
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}
